@@ -36,8 +36,11 @@ const UsuarioSchema = Schema({
 });
 
 //Metodo para evitar que nos retorne en __v y el password en el JSON
+
 UsuarioSchema.methods.toJSON = function name(params) {
-    const { __v, password, ...usuario} = this.toObject();
+    const { __v, password, _id, ...usuario } = this.toObject();
+    //despues de extraer renombremos el _id x uid
+    usuario.uid = _id;
     return usuario;
 }
 
